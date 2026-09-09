@@ -1,0 +1,14 @@
+/*
+  Use the following to include this css file
+  <link rel="stylesheet" href="styles1.css" />
+*/
+body{
+  padding: 2px;
+}
+.title {
+    font-size: 48px;
+    -webkit-text-stroke: 1px black; /* Thickness and color of the outline */
+}
+.title {
+	color: #88dc5e;
+}
