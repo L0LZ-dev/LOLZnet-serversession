@@ -62,7 +62,7 @@ async function fetchFiles() {
 function render() {
     const q = search.value.toLowerCase().trim();
     const a = files.filter(f => f.name.toLowerCase().includes(q));
-    count.textContent = a.length + ' Posts' + (a.length === 1 ? '' : 's');
+    count.textContent = a.length + ' Post' + (a.length === 1 ? '' : 's');
     list.innerHTML = a.map(f => `
         <div class="item">
             <div class="name" title="${esc(f.name)}">${esc(f.name)}</div>
