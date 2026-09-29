@@ -1,9 +1,12 @@
 <!doctype html>
+<!-- this is open source use it however you like It has not been encoded for security-->
+<!-- This was originally developed by TechZero and continued by Team-32 and L0Lz_dev -->
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>L0Lz.net/workshop/1.2</title>
+    <!-- colors and style -->
     <style>
         body{font-family:system-ui;margin:0;background:#32a852;color:#222}
         .wrap{max-width:1000px;margin:40px auto;padding:0 20px}
@@ -26,14 +29,14 @@
 <body>
 <div class="wrap">
     <h1>Original By TechZero (Launcher V1) L0Lz.net Workshop (V1.2) by L0Lz_dev</h1>
-    <div class="muted">----Do Not Distribute this is only for people without accsess to discord and is packaged with L0Lz.net Definitive Edition package and the Anaversary Edition----     ----old versions not supported download latest to stay online----</div>
+    <div class="muted">----Do Not Distribute this is avalable on github just download it there---- ----old versions not supported download L0Lz.net's latest workshop to stay online----</div>
     <input id="search" class="search" placeholder="⌕Search Files...">
     <div id="count" class="count">Loading files...</div>
     <div id="list" class="list"></div>
 </div>
-
+    <!-- Script for the file list -->
 <script>
-// Replace this URL with your actual GitHub raw JSON URL
+// Replace this URL with GitHub raw URL (Currently L0Lz.net related)
 const JSON_URL = 'https://raw.githubusercontent.com/L0LZ-dev/LOLZnet-serversession/refs/heads/main/L0Lz.net.workshop.V1.2.json';
 
 let files = [];
@@ -41,7 +44,6 @@ const list = document.getElementById('list'),
       search = document.getElementById('search'),
       count = document.getElementById('count');
 
-// Fetch the data from GitHub
 async function fetchFiles() {
     try {
         const response = await fetch(JSON_URL);
@@ -75,7 +77,6 @@ function esc(s) {
 
 search.addEventListener('input', render);
 
-// Start the fetch process when the page loads
 fetchFiles();
 </script>
 </body>
