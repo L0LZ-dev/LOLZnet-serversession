@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>L0Lz.net/workshop/1.2</title>
+    <style>
+        body{font-family:system-ui;margin:0;background:#32a852;color:#222}
+        .wrap{max-width:1000px;margin:40px auto;padding:0 20px}
+        h1{margin-bottom:8px}
+        .muted{color:#666}
+        .search{width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ccc;border-radius:10px;font-size:16px;margin:20px 0}
+        .list{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px #0001}
+        .item{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 16px;border-bottom:1px solid #eee}
+        .item:last-child{border-bottom:0}
+        .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .btn{background:#00ffb3;color:Orange;text-decoration:none;padding:8px 13px;border-radius:8px;white-space:nowrap}
+        .count{margin:10px 0;color:#666;font-size:14px}
+        @media(max-width:600px){
+            .item{align-items:flex-start}
+            .name{white-space:normal}
+            .btn{padding:7px 10px}
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>Original By TechZero (Launcher V1) L0Lz.net Workshop (V1.2) by L0Lz_dev</h1>
+    <div class="muted">----Do Not Distribute this is only for people without accsess to discord and is packaged with L0Lz.net Definitive Edition package and the Anaversary Edition----     ----old versions not supported download latest to stay online----</div>
+    <input id="search" class="search" placeholder="⌕Search Files...">
+    <div id="count" class="count">Loading files...</div>
+    <div id="list" class="list"></div>
+</div>
+
+<script>
+// Replace this URL with your actual GitHub raw JSON URL
+const JSON_URL = 'https://raw.githubusercontent.com/L0LZ-dev/LOLZnet-serversession/refs/heads/main/L0Lz.net.workshop.V1.2.json';
+
+let files = [];
+const list = document.getElementById('list'),
+      search = document.getElementById('search'),
+      count = document.getElementById('count');
+
+// Fetch the data from GitHub
+async function fetchFiles() {
+    try {
+        const response = await fetch(JSON_URL);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        files = await response.json();
+        render();
+    } catch (error) {
+        console.error("Could not fetch file list:", error);
+        count.textContent = "Error loading files.";
+        list.innerHTML = `<div style="padding:25px;text-align:center;color:red">Failed to load files from Workshop.</div>`;
+    }
+}
+
+function render() {
+    const q = search.value.toLowerCase().trim();
+    const a = files.filter(f => f.name.toLowerCase().includes(q));
+    count.textContent = a.length + ' file' + (a.length === 1 ? '' : 's');
+    list.innerHTML = a.map(f => `
+        <div class="item">
+            <div class="name" title="${esc(f.name)}">${esc(f.name)}</div>
+            <a class="btn" href="https://drive.google.com/uc?export=download&id=${encodeURIComponent(f.id)}">Download</a>
+        </div>
+    `).join('') || '<div style="padding:25px;text-align:center;color:#777">No files found.</div>';
+}
+
+function esc(s) {
+    return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+search.addEventListener('input', render);
+
+// Start the fetch process when the page loads
+fetchFiles();
+</script>
+</body>
+</html>
